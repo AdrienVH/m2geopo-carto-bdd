@@ -1,0 +1,23 @@
+version: "3"
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.com
+      PGADMIN_DEFAULT_PASSWORD: test
+    networks:
+      - ingress
+      - default
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.m2geopo-carto-bdd.rule=Host(`m2geopo-carto-bdd.adrienvh.fr`)"
+      - "traefik.http.routers.m2geopo-carto-bdd.entrypoints=websecure"
+      - "traefik.http.routers.m2geopo-carto-bdd.tls.certresolver=letsencrypt"
+  db:
+    build: ./db/
+    restart: always
+networks:
+  ingress:
+    name: gateway_ingress
+    external: true

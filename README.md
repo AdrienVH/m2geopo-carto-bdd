@@ -1,29 +1,45 @@
 # Documentation
 
+## Données
+
+Les données utilisées ici sont issues du site **opendata.bordeaux-metropole.fr/**
+
+- "Eclairage public : Points lumineux en 2019 de Bordeaux" (points)
+https://opendata.bordeaux-metropole.fr/explore/dataset/bor_ptlum/information/
+
+- "Itinéraires Vélo et Pédestre" (lignes)
+https://opendata.bordeaux-metropole.fr/explore/dataset/pc_itinerance_l/information/
+
+- "Parcs, jardins et squares de Bordeaux" (surfaces)
+https://opendata.bordeaux-metropole.fr/explore/dataset/bor_parcjardin/information/
+
 ## Déploiement
 
-### Client FTP
+### Client SFTP
 
 - Pousser le code source sur le serveur
 
 ### Lignes de commande
 
 - ssh xxx@ns377949.ip-5-196-94.eu -p xxxx
-- docker build . -t m2geopo-carto-bdd:latest
-- docker run -d --name m2geopo-carto-bdd -p 7777:5432 m2geopo-carto-bdd:latest
+- cd /data/projets/m2geopo-carto-bdd.adrienvh.fr
+- make clean && make start (ou make watch)
 
-## Consommation (QGIS)
+## Utilisation
 
-### Information de connexion
+### Avec pgAdmin
 
-- Nom : saisie libre
-- Service : laisser vide
-- Hôte : ns377949.ip-5-196-94.eu
-- Port : 7777
-- Base de données : m2geopo
-- SSL mode : désactive
+### Se connecter à pgAdmin
 
-### Authentification (De base)
+- **Se rendre sur https://m2geopo-carto-bdd.adrienvh.fr/**
+- Email Address / Username : test@test.com
+- Password : test
 
-- Nom d'utilisateur : m2geopo
-- Mot de passe : m2geopo
+### Se connecter à la BDD
+
+- **Cliquer sur Add New Server**
+- General > Name : saisie libre
+- Connection > Host name/address : db
+- Connection > Port : 5432
+- Connection > Username : m2geopo
+- Connection > Password : m2geopo

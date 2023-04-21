@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    build: ./db/
+    restart: always
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: test@test.com
+      PGADMIN_DEFAULT_PASSWORD: test
+    ports:
+      - "2104:80"
+    depends_on:
+      - db
