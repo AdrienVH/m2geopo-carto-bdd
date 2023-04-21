@@ -1,45 +1,45 @@
-# Documentation
+# 1. Données
 
-## Données
+Les données utilisées ici sont issues du site **opendata.bordeaux-metropole.fr**
 
-Les données utilisées ici sont issues du site **opendata.bordeaux-metropole.fr/**
+- "Eclairage public : Points lumineux en 2019 de Bordeaux" (points) :
+[Source](https://opendata.bordeaux-metropole.fr/explore/dataset/bor_ptlum/information/)
+- "Itinéraires Vélo et Pédestre" (lignes) :
+[Source](https://opendata.bordeaux-metropole.fr/explore/dataset/pc_itinerance_l/information/)
+- "Parcs, jardins et squares de Bordeaux" (surfaces) :
+[Source](https://opendata.bordeaux-metropole.fr/explore/dataset/bor_parcjardin/information/)
 
-- "Eclairage public : Points lumineux en 2019 de Bordeaux" (points)
-https://opendata.bordeaux-metropole.fr/explore/dataset/bor_ptlum/information/
+# 2. Déploiement
 
-- "Itinéraires Vélo et Pédestre" (lignes)
-https://opendata.bordeaux-metropole.fr/explore/dataset/pc_itinerance_l/information/
+## Client SFTP
 
-- "Parcs, jardins et squares de Bordeaux" (surfaces)
-https://opendata.bordeaux-metropole.fr/explore/dataset/bor_parcjardin/information/
+- Pousser le code source de la composition sur le serveur
 
-## Déploiement
+## Lignes de commande
 
-### Client SFTP
-
-- Pousser le code source sur le serveur
-
-### Lignes de commande
-
-- ssh xxx@ns377949.ip-5-196-94.eu -p xxxx
+- ssh
 - cd /data/projets/m2geopo-carto-bdd.adrienvh.fr
 - make clean && make start (ou make watch)
 
-## Utilisation
+# 3. Utilisation
 
-### Avec pgAdmin
+## Avec pgAdmin
 
 ### Se connecter à pgAdmin
 
-- **Se rendre sur https://m2geopo-carto-bdd.adrienvh.fr/**
+Se rendre sur https://m2geopo-carto-bdd.adrienvh.fr
+
 - Email Address / Username : test@test.com
 - Password : test
 
 ### Se connecter à la BDD
 
-- **Cliquer sur Add New Server**
-- General > Name : saisie libre
-- Connection > Host name/address : db
-- Connection > Port : 5432
-- Connection > Username : m2geopo
-- Connection > Password : m2geopo
+Cliquer sur Add New Server
+
+- Onglet "General"
+  - Name : saisie libre
+- Onglet "Connection"
+  - Host name/address : db
+  - Port : 5432
+  - Username : m2geopo
+  - Password : m2geopo
