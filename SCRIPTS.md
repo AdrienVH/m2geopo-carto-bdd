@@ -41,20 +41,22 @@ FROM adrien.communes AS c
 ORDER BY pop_2021 DESC;
 ```
 
-## 1.5 Joindre des données d'une autre table avec JOIN (par attribut)
-
-```
-TODO JOIN (consommations ?, populations ?)
-```
-
-## 1.6 Aggréger (grouper) des données
+## 1.5 Aggréger (grouper) des données
 
 Instructions : GROUP BY
 
 ```
 SELECT commune, count(*) AS nombre
-FROM adrien.itineraires as i
+FROM adrien.itineraires AS i
 GROUP BY commune;
+```
+
+## 1.6 Joindre des données d'une autre table avec JOIN (par attribut)
+
+```
+SELECT i.typologie, i.nature, i.code_commune, c.insee, c.nom, i.geometry
+FROM adrien.itineraires AS i
+LEFT JOIN adrien.communes AS c ON i.code_commune = c.insee;
 ```
 
 ## 1.7 N'afficher que les premières/dernières lignes
