@@ -41,7 +41,16 @@ FROM adrien.communes AS c
 ORDER BY pop_2021 DESC;
 ```
 
-## 1.5 Aggréger (grouper) des données
+## 1.5 N'afficher que les premières lignes
+
+```
+SELECT insee, nom, pop_2021
+FROM adrien.communes
+ORDER BY pop_2021 DESC
+LIMIT 5 OFFSET 1;
+```
+
+## 1.6 Aggréger (grouper) des données
 
 Instructions : GROUP BY
 
@@ -51,24 +60,12 @@ FROM adrien.itineraires AS i
 GROUP BY commune;
 ```
 
-## 1.6 Joindre des données d'une autre table avec JOIN (par attribut)
+## 1.7 Joindre des données d'une autre table avec JOIN (par attribut)
 
 ```
 SELECT i.typologie, i.nature, i.code_commune, c.insee, c.nom, i.geometry
 FROM adrien.itineraires AS i
 LEFT JOIN adrien.communes AS c ON i.code_commune = c.insee;
-```
-
-## 1.7 N'afficher que les premières/dernières lignes
-
-Instructions : LIMIT
-
-```
-SELECT commune, count(*) AS nombre
-FROM adrien.itineraires as i
-GROUP BY commune
-ORDER BY nombre DESC
-LIMIT 5;
 ```
 
 # 2. Modifier des données
