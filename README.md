@@ -8,6 +8,8 @@ Les données utilisées ici sont issues du site **opendata.bordeaux-metropole.fr
 [Source](https://opendata.bordeaux-metropole.fr/explore/dataset/pc_itinerance_l/information/)
 - "Parcs, jardins et squares de Bordeaux" (surfaces) :
 [Source](https://opendata.bordeaux-metropole.fr/explore/dataset/bor_parcjardin/information/)
+- "Limites des communes de Bordeaux Métropole" (surfaces) :
+[Source](https://opendata.bordeaux-metropole.fr/explore/dataset/fv_commu_s/information/)
 
 # 2. Déploiement
 

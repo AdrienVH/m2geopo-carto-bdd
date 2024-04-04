@@ -6,5 +6,6 @@ COPY ./sql/00_extensions.sql /docker-entrypoint-initdb.d/
 COPY ./sql/01_lampadaires.sql /docker-entrypoint-initdb.d/
 COPY ./sql/02_itineraires.sql /docker-entrypoint-initdb.d/
 COPY ./sql/03_parcs.sql /docker-entrypoint-initdb.d/
-COPY ./sql/04_schemas.sql /docker-entrypoint-initdb.d/
+COPY ./sql/04_communes.sql /docker-entrypoint-initdb.d/
+COPY ./sql/05_schemas.sql /docker-entrypoint-initdb.d/
 EXPOSE 5432

@@ -1,41 +1,55 @@
-# 1. Lecture de données
+# 1. Afficher des données
 
-## Lire une table avec SELECT
+## 1.1 Afficher les données d'une table
+
+Instructions : SELECT, FROM
 
 ```
 SELECT * FROM adrien.lampadaires;
-SELECT * FROM adrien.lampadaires AS l;
 ```
 
-### En listant les champs souhaités
+## 1.2 Filtrer les colonnes (champs)
 
 ```
-SELECT domaine, categorie, wkb_geometry FROM adrien.lampadaires AS l;
-SELECT domaine, categorie, wkb_geometry AS geom FROM adrien.lampadaires AS l;
+SELECT domaine, categorie, geometry FROM adrien.lampadaires AS l;
+SELECT domaine, categorie, geometry AS geom FROM adrien.lampadaires AS l;
 ```
-## Filtrer les données avec WHERE (filtre attributaire)
+
+## 1.3 Filtrer les lignes (filtre attributaire)
+
+Instructions : WHERE, IN
 
 ```
-SELECT domaine, categorie, wkb_geometry AS geom
+SELECT domaine, categorie, geometry AS geom
 FROM adrien.lampadaires
 WHERE categorie = 'MAT';
 ```
 
-## Trier les données avec ORDER BY
-
 ```
-SELECT gid AS id, typologie, nature, code_commune, commune
-FROM adrien.itineraires AS i
-ORDER BY commune ASC;
+SELECT domaine, categorie, geometry AS geom
+FROM adrien.lampadaires
+WHERE categorie IN ('MAT', 'PBO', 'SUS');
 ```
 
-## Joindre des données d'une autre table avec JOIN (par attribut)
+## 1.4 Ordonner les données
+
+Instructions : ORDER BY (ASC/DESC)
 
 ```
-TODO
+SELECT insee, nom, pop_2021
+FROM adrien.communes AS c
+ORDER BY pop_2021 DESC;
 ```
 
-## Grouper des données avec GROUP BY
+## 1.5 Joindre des données d'une autre table avec JOIN (par attribut)
+
+```
+TODO JOIN (consommations ?, populations ?)
+```
+
+## 1.6 Aggréger (grouper) des données
+
+Instructions : GROUP BY
 
 ```
 SELECT commune, count(*) AS nombre
@@ -43,7 +57,9 @@ FROM adrien.itineraires as i
 GROUP BY commune;
 ```
 
-## Se limiter à certaines données avec LIMIT
+## 1.7 N'afficher que les premières/dernières lignes
+
+Instructions : LIMIT
 
 ```
 SELECT commune, count(*) AS nombre
@@ -53,47 +69,64 @@ ORDER BY nombre DESC
 LIMIT 5;
 ```
 
-# 2. Modification de données
+# 2. Modifier des données
+
+Instructions : UPDATE (SET) et LIKE
 
 ```
-UPDATE table SET champ = valeur;
-UPDATE table SET champ = valeur WHERE champ = valeur;
-
-DELETE FROM table WHERE champ != valeur;
+UPDATE adrien.lampadaires
+SET domaine = 'Eclairage public'
+WHERE domaine LIKE 'EP%';
 ```
 
-# 3. Fonctions cartographiques
+# 3. Supprimer de données
 
-## Calculer une longueur avec ST_Length
+Instructions : DELETE
 
 ```
-SELECT ST_Length(wkb_geometry) AS longueur_m, *
+DELETE FROM adrien.lampadaires
+WHERE domaine != 'Eclairage public';
+```
+
+# 4. Fonctions cartographiques
+
+## 4.1 Calculer une longueur avec ST_Length
+
+```
+SELECT ST_Length(geometry) AS longueur_m, *
 FROM adrien.itineraires;
 ```
 
-## Calculer une zone tampon avec ST_Buffer
+```
+SELECT commune, sum(ROUND(ST_Length(geometry))) AS longueur_totale
+FROM adrien.itineraires
+GROUP BY commune
+ORDER BY longueur_totale DESC
+LIMIT 3;
+```
+
+## 4.2 Calculer une zone tampon avec ST_Buffer
 
 ```
-SELECT ST_Buffer(wkb_geometry, 50) AS tampon, *
-FROM adrien.parcs;
+SELECT ST_Buffer(geometry, 50) AS tampon FROM adrien.itineraires;
 ```
 
-## Calculer une intersection avec ST_Intersects ou ST_Within
+## 4.3 Calculer une intersection avec ST_Intersects ou ST_Within
 
 ```
 SELECT l.*
 FROM adrien.lampadaires AS l
 JOIN adrien.parcs AS p
-ON ST_Within(l.wkb_geometry, p.wkb_geometry);
+ON ST_Within(l.geometry, p.geometry);
 ```
 
-## Joindre des données d'une autre table avec JOIN (par localisation)
+## 4.4 Joindre des données d'une autre table avec JOIN (par localisation)
 
 ```
 TODO
 ```
 
-## Documentation des fonctions PostGIS
+## 4.5 Documentation des fonctions PostGIS utilisées
 
 - https://postgis.net/docs/ST_Length.html
 - https://postgis.net/docs/ST_Buffer.html
