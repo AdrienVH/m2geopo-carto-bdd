@@ -43,6 +43,8 @@ ORDER BY pop_2021 DESC;
 
 ## 1.5 N'afficher que les premières lignes
 
+Instructions : LIMIT (OFFSET)
+
 ```
 SELECT insee, nom, pop_2021
 FROM adrien.communes

@@ -3,6 +3,8 @@ services:
   db:
     build: ./db/
     restart: always
+    ports:
+      - "8639:5432"
   pgadmin:
     image: dpage/pgadmin4:latest
     restart: always
